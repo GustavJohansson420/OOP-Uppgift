@@ -1,0 +1,15 @@
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\bin\Debug\net6.0\OOP-Uppgift.exe
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\bin\Debug\net6.0\OOP-Uppgift.deps.json
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\bin\Debug\net6.0\OOP-Uppgift.runtimeconfig.json
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\bin\Debug\net6.0\OOP-Uppgift.dll
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\bin\Debug\net6.0\OOP-Uppgift.pdb
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.AssemblyInfo.cs
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.dll
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\refint\OOP-Uppgift.dll
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.pdb
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\OOP-Uppgift.genruntimeconfig.cache
+C:\Users\Admin\Documents\GitHub\OOP-Uppgift\obj\Debug\net6.0\ref\OOP-Uppgift.dll
