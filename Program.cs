@@ -1,9 +1,11 @@
-﻿class Program
+﻿using System.IO;
+
+class Program
 {
     public static void Main()
     {
-        bool goblinActive;
-        bool jätteActive;
+        bool goblinActive = false;
+        bool jätteActive = false;
         Random rnd = new Random();
         Player player = new Player(100);
         Goblin goblin = new Goblin(50);
@@ -50,11 +52,63 @@
             }
             Console.WriteLine("NPC: Nu är det dags att slåss!");
             Console.WriteLine("NPC: Du börjar att attackera");
-            int attack1 = rnd.Next(10, 20);
-            if (goblinActive = true)
+            while (player.PlayerHP > 0)
             {
-                goblin.GoblinTakeDamage(attack1);
+                Console.WriteLine("tryck a för att attackera");
+                string attackinput1 = Console.ReadLine();
+                if (attackinput1 == "a")
+                {
+                    int attack1 = rnd.Next(15, 20);
+                    if (jätteActive == true)
+                    {
+                        Console.WriteLine("Du gör " + attack1 + " skada på jätte");
+                        jätte.JätteTakeDamage(attack1);
+                    }
+                    else if (goblinActive == true)
+                    {
+                        Console.WriteLine("Du gör " + attack1 + " skada på goblin");
+                        goblin.GoblinTakeDamage(attack1);
+                    }
+                    Console.WriteLine("Nu attackera din fiende");
+                    if (goblinActive == true)
+                    {
+                        int goblinAttack1 = rnd.Next(1, 20);
+                        Console.WriteLine("Goblin gör " + goblinAttack1 + " skada");
+                        player.PlayerTakeDamage(goblinAttack1);
+                    }
+                    if (jätteActive == true)
+                    {
+                        int jätteAttack1 = rnd.Next(5, 10);
+                        Console.WriteLine("Jätte gör " + jätteAttack1 + " skada");
+                        player.PlayerTakeDamage(jätteAttack1);
+                    }
+                    if(goblin.GoblinHP <= 0)
+                    {
+                        Console.WriteLine("Du dödade en goblin och fick en poäng men en ny goblin spawnade");
+                        goblin.GoblinHP = 50;
+                        player.Points += 1;
+                    }
+                    if(jätte.JätteHP <= 0)
+                    {
+                        Console.WriteLine("Du dödade en jätte och fick en poäng men en ny jätte spawnade");
+                        jätte.JätteHP = 150;
+                        player.Points += 1;
+                    }
+                    Console.WriteLine("Ditt hp: " + player.PlayerHP);
+                    Console.WriteLine("Jättens hp: " + jätte.JätteHP);
+                    Console.WriteLine("Goblins hp: " + goblin.GoblinHP);
+                }
+                else
+                {
+                    Console.WriteLine("Fel, börja om och försök igen");
+                    player.PlayerTakeDamage(100);
+                }
             }
+            Console.WriteLine("Du dog");
+            StreamWriter sw = new StreamWriter("DinPoäng.txt");
+            sw.WriteLine("Din poäng: " + player.Points);
+            sw.Close();
+
         }
         else
         {

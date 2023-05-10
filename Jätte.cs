@@ -5,6 +5,7 @@ class Jätte
     public int JätteHP
     {
         get { return jätteHP; }
+        set { jätteHP = value; }
     }
 
     public Jätte(int hp)

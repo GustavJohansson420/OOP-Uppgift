@@ -5,6 +5,7 @@ class Goblin
     public int GoblinHP
     {
         get { return goblinHP; }
+        set { goblinHP = value; }
     }
 
     public Goblin(int hp)
