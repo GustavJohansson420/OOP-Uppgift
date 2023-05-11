@@ -1,4 +1,4 @@
-class Goblin
+class Goblin : Enemy
 {
     private int goblinHP;
 
@@ -15,5 +15,10 @@ class Goblin
     public void GoblinTakeDamage(int amount)
     {
         goblinHP -= amount;
+    }
+    public override void EnemyDoDamage(Player character, int amount)
+    {
+        character.PlayerHP -= amount;
+        Console.WriteLine("Goblin gör " + amount + " skada");
     }
 }

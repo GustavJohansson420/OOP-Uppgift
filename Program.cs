@@ -8,13 +8,15 @@ class Program
         bool jätteActive = false;
         Random rnd = new Random();
         Player player = new Player(100);
-        Goblin goblin = new Goblin(50);
-        Jätte jätte = new Jätte(150);
-        Console.WriteLine("NPC: Hej");
-        Console.WriteLine("Tryck k för att gå vidare");
+        Enemy goblin = new Goblin(50);
+        Enemy jätte = new Jätte(150);
+        player.PlayerState = "I huvudmeny";
+        Console.WriteLine("NPC: Hej, följ med mig till staden");
+        Console.WriteLine("Tryck k för att gå till staden");
         string playerInput1 = Console.ReadLine();
         if(playerInput1 == "k")
         {
+            player.PlayerState = "i staden";
             Console.WriteLine("NPC: Du ska slåss mot monster, välj monster:");
             Console.WriteLine("NPC: Vill du slåss mot Goblin?");
             Console.WriteLine("tryck j för ja tryck n för nej");
@@ -50,10 +52,19 @@ class Program
             {
                 Console.WriteLine("Fel, börja om och försök igen");
             }
-            Console.WriteLine("NPC: Nu är det dags att slåss!");
-            Console.WriteLine("NPC: Du börjar att attackera");
+            if (goblinActive == false && jätteActive == false)
+            {
+                Console.WriteLine("NPC: Du är en feg jävel, sånna accepterar jag inte och därför dödar jag dig");
+                player.PlayerTakeDamage(100);
+            }
+            else
+            {
+                Console.WriteLine("NPC: Nu är det dags att slåss!");
+                Console.WriteLine("NPC: Du börjar att attackera");
+            }
             while (player.PlayerHP > 0)
             {
+                player.PlayerState = "I strid";
                 Console.WriteLine("tryck a för att attackera");
                 string attackinput1 = Console.ReadLine();
                 if (attackinput1 == "a")
@@ -72,27 +83,42 @@ class Program
                     Console.WriteLine("Nu attackera din fiende");
                     if (goblinActive == true)
                     {
-                        int goblinAttack1 = rnd.Next(1, 20);
-                        Console.WriteLine("Goblin gör " + goblinAttack1 + " skada");
-                        player.PlayerTakeDamage(goblinAttack1);
+                        goblin.EnemyDoDamage(player, rnd.Next(1, 20));
                     }
                     if (jätteActive == true)
                     {
-                        int jätteAttack1 = rnd.Next(5, 10);
-                        Console.WriteLine("Jätte gör " + jätteAttack1 + " skada");
-                        player.PlayerTakeDamage(jätteAttack1);
+                        jätte.EnemyDoDamage(player, rnd.Next(5, 10));
                     }
                     if(goblin.GoblinHP <= 0)
                     {
                         Console.WriteLine("Du dödade en goblin och fick en poäng men en ny goblin spawnade");
                         goblin.GoblinHP = 50;
                         player.Points += 1;
+                        Console.WriteLine("Snurra hjulet för att få tillbaka hp eller kanske förlora hp");
+                        Console.WriteLine("tryck k för att snurra hjulet");
+                        string snurraHjuletInput = Console.ReadLine();
+                        if(snurraHjuletInput == "k")
+                        {
+                            int hjulSnurr = rnd.Next(-30, 50);
+                            player.PlayerHP += hjulSnurr;
+                            Console.WriteLine("Du fick " + hjulSnurr + " hp");
+                        }
+
                     }
                     if(jätte.JätteHP <= 0)
                     {
                         Console.WriteLine("Du dödade en jätte och fick en poäng men en ny jätte spawnade");
                         jätte.JätteHP = 150;
                         player.Points += 1;
+                        Console.WriteLine("Snurra hjulet för att få tillbaka hp eller kanske förlora hp");
+                        Console.WriteLine("tryck k för att snurra hjulet");
+                        string snurraHjuletInput = Console.ReadLine();
+                        if(snurraHjuletInput == "k")
+                        {
+                            int hjulSnurr = rnd.Next(-30, 50);
+                            player.PlayerHP += hjulSnurr;
+                            Console.WriteLine("Du fick " + hjulSnurr + " hp");
+                        }
                     }
                     Console.WriteLine("Ditt hp: " + player.PlayerHP);
                     Console.WriteLine("Jättens hp: " + jätte.JätteHP);
@@ -104,10 +130,18 @@ class Program
                     player.PlayerTakeDamage(100);
                 }
             }
-            Console.WriteLine("Du dog");
+            player.PlayerState = "död";
+            Console.WriteLine("Du är nu " + player.PlayerState);
             StreamWriter sw = new StreamWriter("DinPoäng.txt");
-            sw.WriteLine("Din poäng: " + player.Points);
-            sw.Close();
+            try
+            {
+                sw.WriteLine("Din poäng: " + player.Points);
+                sw.Close();
+            }
+            catch
+            {
+                Console.WriteLine("Det blev något fel med filen");
+            }
 
         }
         else

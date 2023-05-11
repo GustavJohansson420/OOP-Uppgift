@@ -1,4 +1,4 @@
-class Jätte
+class Jätte : Enemy
 {
     private int jätteHP;
 
@@ -16,5 +16,10 @@ class Jätte
     public void JätteTakeDamage(int amount)
     {
         jätteHP -= amount;
+    }
+    public override void EnemyDoDamage(Player character, int amount)
+    {
+        character.PlayerHP -= amount;
+        Console.WriteLine("Jätte gör " + amount + " skada");
     }
 }
