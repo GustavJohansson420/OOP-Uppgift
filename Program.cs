@@ -8,8 +8,8 @@ class Program
         bool jätteActive = false;
         Random rnd = new Random();
         Player player = new Player(100);
-        Enemy goblin = new Goblin(50);
-        Enemy jätte = new Jätte(150);
+        Enemy goblin = new Goblin(100);
+        Enemy jätte = new Jätte(75);
         player.PlayerState = "I huvudmeny";
         Console.WriteLine("NPC: Hej, följ med mig till staden");
         Console.WriteLine("Tryck k för att gå till staden");
@@ -72,13 +72,11 @@ class Program
                     int attack1 = rnd.Next(15, 20);
                     if (jätteActive == true)
                     {
-                        Console.WriteLine("Du gör " + attack1 + " skada på jätte");
-                        jätte.JätteTakeDamage(attack1);
+                        player.PlayerDoDamage(jätte, attack1 / 2);
                     }
                     else if (goblinActive == true)
                     {
-                        Console.WriteLine("Du gör " + attack1 + " skada på goblin");
-                        goblin.GoblinTakeDamage(attack1);
+                        player.PlayerDoDamage(goblin, attack1 * 2);
                     }
                     Console.WriteLine("Nu attackera din fiende");
                     if (goblinActive == true)
@@ -89,10 +87,10 @@ class Program
                     {
                         jätte.EnemyDoDamage(player, rnd.Next(5, 10));
                     }
-                    if(goblin.GoblinHP <= 0)
+                    if(goblin.EnemyHP <= 0)
                     {
                         Console.WriteLine("Du dödade en goblin och fick en poäng men en ny goblin spawnade");
-                        goblin.GoblinHP = 50;
+                        goblin.EnemyHP = 100;
                         player.Points += 1;
                         Console.WriteLine("Snurra hjulet för att få tillbaka hp eller kanske förlora hp");
                         Console.WriteLine("tryck k för att snurra hjulet");
@@ -105,10 +103,10 @@ class Program
                         }
 
                     }
-                    if(jätte.JätteHP <= 0)
+                    if(jätte.EnemyHP <= 0)
                     {
                         Console.WriteLine("Du dödade en jätte och fick en poäng men en ny jätte spawnade");
-                        jätte.JätteHP = 150;
+                        jätte.EnemyHP = 75;
                         player.Points += 1;
                         Console.WriteLine("Snurra hjulet för att få tillbaka hp eller kanske förlora hp");
                         Console.WriteLine("tryck k för att snurra hjulet");
@@ -121,8 +119,8 @@ class Program
                         }
                     }
                     Console.WriteLine("Ditt hp: " + player.PlayerHP);
-                    Console.WriteLine("Jättens hp: " + jätte.JätteHP);
-                    Console.WriteLine("Goblins hp: " + goblin.GoblinHP);
+                    Console.WriteLine("Jättens hp: " + jätte.EnemyHP);
+                    Console.WriteLine("Goblins hp: " + goblin.EnemyHP);
                 }
                 else
                 {

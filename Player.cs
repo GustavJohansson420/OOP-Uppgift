@@ -31,4 +31,10 @@ class Player
     {
         playerHP -= amount;
     }
+    
+    public void PlayerDoDamage(Enemy enemyCharacter, int amount)
+    {
+        enemyCharacter.EnemyHP -= amount;
+        Console.WriteLine("Du gör " + amount + " skada");
+    }
 }
